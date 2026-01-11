@@ -69,8 +69,9 @@ def read_plate_easyocr(plate_image):
         
         if len(plate_text) >= 6:
             if plate_format_check(plate_text):
-            return improve_plate_text(plate_text), plate_score
-        return improve_plate_text(plate_text), plate_score * 0.5  # Lower confidence if invalid format
+                return improve_plate_text(plate_text), plate_score
+            else:
+                return improve_plate_text(plate_text), plate_score * 0.5  # Lower confidence if invalid format
     
     return None, 0.0
 
