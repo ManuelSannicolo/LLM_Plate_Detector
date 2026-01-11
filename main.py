@@ -40,7 +40,7 @@ while True:
         x1, y1, x2, y2, score, class_id = r
         class_id = int(class_id)
         
-        if class_id not in to_detect or score <= 0.3:
+        if class_id not in to_detect or score <= 0.2:
             continue
         
         label = None
@@ -112,7 +112,7 @@ while True:
         # Crop plate
         plate_cropped = vehicle_cropped[int(y1p/2):int(y2p/2), int(x1p/2):int(x2p/2)]
         
-        if plate_cropped.size == 0 or plate_cropped.shape[0] < 2:
+        if plate_cropped.size == 0 or plate_cropped.shape[0] < 10 or plate_cropped.shape[1] < 30:
             continue
         
         new_width = int((x2p-x1p) * 3)
