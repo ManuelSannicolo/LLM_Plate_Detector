@@ -21,7 +21,7 @@ class DatabaseManager:
         
         cursor = self.connection.cursor()
         
-        # Authorized plates table
+        #authorized plates table
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS authorized_plates (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -48,7 +48,7 @@ class DatabaseManager:
             )
         """)
         
-        # Indexes for performance
+        #indexes for performance
         cursor.execute("""
             CREATE INDEX IF NOT EXISTS idx_plate_number 
             ON authorized_plates(plate_number)
@@ -105,7 +105,7 @@ class DatabaseManager:
             
             plate_info = dict(row)
             
-            # Check expiration
+            #check expiration
             expiration_date_str = plate_info.get('expiration_date')
             
             if expiration_date_str and expiration_date_str.strip() != "":
@@ -165,7 +165,7 @@ class DatabaseManager:
             self.connection.close()
             print("✅ Database closed")
 
-# Test
+#test
 if __name__ == "__main__":
     db = DatabaseManager()
     
