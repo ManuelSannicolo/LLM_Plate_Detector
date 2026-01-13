@@ -92,3 +92,23 @@ AUTHORIZED_CAMERAS = {
 }
 
 REQUIRE_CAMERA_AUTH = True
+
+# Frame source
+FRAME_SOURCE = "non-local"  # "local" or "non-local"
+
+# Device
+import torch
+DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'
+
+# Database path
+DATABASE_PATH = os.path.join(DATA_DIR, "authorized_plates.db")
+
+# Tesseract
+TESSERACT_AVAILABLE = False
+FAST_OCR_AVAILABLE = False
+TESSERACT_CMD_PATH = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+USE_FAST_OCR = True
+CONFIDENCE_MIN = 0.75
+
+# Batch size
+BATCH_SIZE = 2
