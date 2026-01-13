@@ -85,3 +85,10 @@ VEHICLE_CROP_MARGIN = 10
 #verbose
 # -------------------------
 VERBOSE = True
+
+#camera authentication
+AUTHORIZED_CAMERAS = {
+    "camera_client01": "g9f3e1d7c4b84eab9f5c1d2e3a4b57kd"
+}
+
+REQUIRE_CAMERA_AUTH = True
