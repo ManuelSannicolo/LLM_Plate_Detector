@@ -171,8 +171,8 @@ def send_video_stream(source=0, fps=10):
 
 if __name__ == "__main__":
     initialize_coco_model()
-    path_video = "video3.mp4"
-    path_image = "test_frame_scura.jpg"
+    path_video = "./test_input/video3.mp4"
+    path_image = "./test_input/test_frame_scura.jpg"
     send_single_frame(cv2.imread(path_image))
     # send_video_stream(path_video, fps=30)
     

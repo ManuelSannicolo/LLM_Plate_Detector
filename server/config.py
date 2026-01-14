@@ -6,8 +6,14 @@ Modificare solo se necessario
 try:
     import os
     import torch
+    from dotenv import load_dotenv
+
 except ImportError as e:
     print(f"Errore nel caricamento dei moduli in config.py: {e}")
+
+
+# Carica variabili segrete ambiente da .env
+load_dotenv()
 
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"  # 'cuda' o 'cpu'
@@ -39,7 +45,7 @@ VEHICLE_IMAGES_DIR = os.path.join(IMAGE_RESULTS_DIR, "detected_vehicles")
 TXT_PATH = os.path.join(DATA_DIR, "authorized_plates.txt")
 DATABASE_PATH = os.path.join(DATA_DIR, "authorized_plates.db")
 
-VIDEO_PATH = os.path.join(PROJECT_ROOT, "video3.mp4")
+VIDEO_PATH = os.path.join(PROJECT_ROOT, "test_input", "video3.mp4")
 
 OUTPUT_CSV = os.path.join(DATA_DIR, "detected_plates.csv")
 
@@ -170,11 +176,9 @@ PROGRESS_INTERVAL = 100
 # ============================================================================
 
 #======= impostazioni OAUTH Google da modificare con le proprie =======
-SECRET_KEY = "a-random-long-secret-key-with-mix-of-chars-1234567890"
-GOOGLE_CLIENT_ID = (
-    "637395466917-vadu7skvhbbtrtcpt99c1ij1c7khof9e.apps.googleusercontent.com"
-)
-GOOGLE_CLIENT_SECRET = "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"
+SECRET_KEY = os.getenv("SECRET_KEY")
+GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID")
+GOOGLE_CLIENT_SECRET = os.getenv("GOOGLE_CLIENT_SECRET")
 REDIRECT_URI = "http://localhost:5000/callback"
 # elenco utenti autorizzati (email)
 AUTHORIZED_USERS = [
@@ -306,6 +310,15 @@ def validate_config():
 
     if not os.path.exists(DATABASE_PATH):
         errors.append(f"Database non trovato: {DATABASE_PATH}")
+        
+    if SECRET_KEY is None or SECRET_KEY == "":
+        errors.append("SECRET_KEY non è impostata nelle variabili ambiente")
+        
+    if GOOGLE_CLIENT_ID is None or GOOGLE_CLIENT_ID == "":
+        errors.append("GOOGLE_CLIENT_ID non è impostata nelle variabili ambiente")
+        
+    if GOOGLE_CLIENT_SECRET is None or GOOGLE_CLIENT_SECRET == "":
+        errors.append("GOOGLE_CLIENT_SECRET non è impostata nelle variabili ambiente")
 
     # Crea directory output se non esistono
     if SAVE_PLATE_IMAGES:
